@@ -1,7 +1,7 @@
 import pandas as pd 
 import numpy as np 
 fake= pd.read_csv("fake.csv")
-real=pd.read_csv("real.csv")
+real=pd.read_csv("true.csv")
 
 #data cleaning 
    #in data cleaning we load the dataset , see if the dataset is really loaded with the help of head or samples then we label the 
