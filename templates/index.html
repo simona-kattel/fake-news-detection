@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fake News Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>📰 Fake News Detector</h1>
+    
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label for="fileInput">
+        <div class="upload-box" id="dropArea">
+          Drag and upload your article here (.txt or .docx)
+        </div>
+      </label>
+      <input type="file" id="fileInput" name="file" accept=".txt,.doc,.docx" required>
+      <button type="submit" id="checkBtn" style="display: none;">Check News</button>
+    </form>
+
+    <!-- 🔄 Fun Loading Animation (replaces old spinner) -->
+    <div id="loading" class="loader-container">
+      <div class="page"></div>
+      <div class="page"></div>
+      <div class="page"></div>
+    </div>
+
+    <!-- 🧠 Prediction and Explanation -->
+    <div id="result" class="result-box"></div>
+    <div id="explanation" class="explanation-box"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
