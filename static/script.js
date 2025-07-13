@@ -13,19 +13,32 @@ fileInput.addEventListener("change", () => {
 document.getElementById("uploadForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const formData = new FormData(this);
-
-  loading.style.display = "block";
-  document.getElementById("result").innerText = "";
-  document.getElementById("explanation").innerText = "";
-
+  showLoading();
   fetch("/predict", {
     method: "POST",
     body: formData,
   })
     .then((res) => res.json())
     .then((data) => {
-      loading.style.display = "none";
-      document.getElementById("result").innerText = "Result: " + data.result;
-      document.getElementById("explanation").innerText = "Explanation: " + data.explanation;
+      window.location.href = `/result?result=${encodeURIComponent(data.result)}&explanation=${encodeURIComponent(data.explanation)}`;
     });
 });
+
+document.getElementById("urlForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const urlInput = document.getElementById("urlInput").value;
+  showLoading();
+  fetch("/predict_url", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url: urlInput }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      window.location.href = `/result?result=${encodeURIComponent(data.result)}&explanation=${encodeURIComponent(data.explanation)}`;
+    });
+});
+
+function showLoading() {
+  loading.style.display = "block";
+}
